@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_12_01_193656) do
 
   create_table "scoreboards", force: :cascade do |t|
-    t.integer "user_id"
+    t.string "game_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_193656) do
     t.string "username"
     t.integer "score"
     t.integer "top_score"
+    t.integer "scoreboard_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

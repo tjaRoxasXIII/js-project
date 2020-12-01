@@ -1,3 +1,3 @@
 class Scoreboard < ApplicationRecord
-    has_many :Users
+    # has_many :Users
 end

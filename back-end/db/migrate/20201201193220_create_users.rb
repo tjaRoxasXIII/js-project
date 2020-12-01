@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :username
       t.integer :score
       t.integer :top_score
+      t.integer :scoreboard_id
 
       t.timestamps
     end
