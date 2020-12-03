@@ -4,8 +4,10 @@ one:
   username: MyString
   score: 1
   top_score: 1
+  scoreboard_id: 1
 
 two:
   username: MyString
   score: 1
   top_score: 1
+  scoreboard_id: 1

@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_193656) do
+ActiveRecord::Schema.define(version: 2020_12_03_155307) do
+
+  create_table "enemies", force: :cascade do |t|
+    t.string "name"
+    t.integer "hp"
+    t.integer "attack"
+    t.integer "points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "heros", force: :cascade do |t|
+    t.string "name"
+    t.integer "hp"
+    t.integer "attack"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "scoreboards", force: :cascade do |t|
     t.string "game_name"

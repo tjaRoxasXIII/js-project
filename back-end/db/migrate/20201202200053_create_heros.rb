@@ -3,7 +3,7 @@ class CreateHeros < ActiveRecord::Migration[6.0]
     create_table :heros do |t|
       t.string :name
       t.integer :hp
-      t.int :attack
+      t.integer :attack
 
       t.timestamps
     end
