@@ -1,14 +1,24 @@
 const SCORE_URL = "http://localhost:3000/scoreboards/1"
 const PLAYERS_URL = "http://localhost:3000/users"
 const ENEMY_URL = "http://localhost:3000/enemies"
+const HERO_URL = "http://localhost:3000/heros"
 let gameArea = document.getElementById("game_area")
+const gameID = 1 //can be adjusted if you have games with different IDs
 let startButton = document.getElementById("start")
 const enemyCards = []
 startButton.style.display = "none"
+let currentPlayer
 
 window.addEventListener(`DOMContentLoaded`, (e) => {
     fetcher(ENEMY_URL, buildEnemyCards)
     fetcher(SCORE_URL, displayScores)
+    const myForm = document.getElementById("player")
+    myForm.addEventListener("submit", function(e) {
+        e.preventDefault()
+        const name = this.username.value
+        createOrSignInPlayer(name, gameID)
+        e.reset
+    })
     document.getElementById("start").addEventListener("click", startGame)
 
     startButton.style.display = "block"
@@ -26,7 +36,10 @@ function displayScores(scorelist) {
     const top_scores = []
 
     for(const user of scorelist.users) {
-        top_scores.push(`${user.username}: ${user.top_score}`)
+        if (user.top_score){
+            top_scores.push(`${user.username}: ${user.top_score}`)
+        }
+
     }
 
     top_scores.sort(function(a, b){return b-a})
