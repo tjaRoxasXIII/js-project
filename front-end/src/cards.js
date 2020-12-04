@@ -22,14 +22,16 @@ function drawCard(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
     let card = characterList[i]
+    let characterDiv = document.createElement("div")
     if (card instanceof Enemy) {
         myEnemy = card
+        characterDiv.id = "enemy-card"
     }
     else {
         myHero = card
+        characterDiv.id = "hero-card"
     }
 
-    let characterDiv = document.createElement("div")
         
 
     let char = document.createElement("ul")
@@ -38,7 +40,7 @@ function drawCard(characterList) {
         characterDiv.appendChild(char)
 
     let charHP = document.createElement("li")
-        // charHP.id = "hp"
+        charHP.id = "hp"
         charHP.innerText = `HP: ${card.hp}`
         characterDiv.appendChild(charHP)
 
@@ -48,4 +50,12 @@ function drawCard(characterList) {
         characterDiv.appendChild(charAtt)
 
     gameArea.appendChild(characterDiv)
+}
+
+function refreshCards() {
+    let enemyCard = document.getElementById("enemy-card")
+    enemyCard.children.hp.innerText = `HP: ${myEnemy.hp}`
+
+    let heroCard = document.getElementById("hero-card")
+    heroCard.children.hp.innerText = `HP: ${myHero.hp}`
 }
