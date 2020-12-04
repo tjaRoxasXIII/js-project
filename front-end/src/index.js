@@ -6,29 +6,14 @@ let startButton = document.getElementById("start")
 const enemyCards = []
 startButton.style.display = "none"
 
-debugger
-
 window.addEventListener(`DOMContentLoaded`, (e) => {
-    fetch(ENEMY_URL)
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(json) {
-        buildEnemyCards(json)
-    })
+    fetcher(ENEMY_URL, buildEnemyCards)
+    fetcher(SCORE_URL, displayScores)
+    document.getElementById("start").addEventListener("click", startGame)
 
     startButton.style.display = "block"
 })
 
-document.getElementById("start").addEventListener("click", startGame)
-
-fetch(SCORE_URL)
-.then(function(response) {
-    return response.json()
-})
-.then(function(json) {
-    displayScores(json)
-})
 
 function displayScores(scorelist) {
 
@@ -41,7 +26,6 @@ function displayScores(scorelist) {
     const top_scores = []
 
     for(const user of scorelist.users) {
-        debugger
         top_scores.push(`${user.username}: ${user.top_score}`)
     }
 
@@ -61,11 +45,10 @@ function displayScores(scorelist) {
 
 function startGame() {
     startButton.style.display = "none"
-
     drawEnemy(enemyCards)
 }
 
-
+// Parses all enemies from the API into a list that can be randomly drawn from for the next fight
 function buildEnemyCards(list) {
 
     for(const enemy of list) {
@@ -80,14 +63,24 @@ function buildEnemyCards(list) {
         enemyHp.innerText = `HP: ${enemy.hp}`
         enemyChar.appendChild(enemyHp)
 
-        enemyCards.push(enemyDiv)
-        
+        enemyCards.push(enemyDiv)  
     }
 }
 
+// Randomly draws an enemy from the Enemy list
 function drawEnemy(enemies) {
     let totalCards = enemyCards.length
     let i = Math.floor(Math.random() * totalCards)
-    debugger
     gameArea.appendChild(enemyCards[i])
+}
+
+//Used to DRY up fetch requests from API
+function fetcher(URL, fnctn) {
+    fetch(URL)
+        .then(function(response) {
+        return response.json()
+    })
+    .then(function(json) {
+        fnctn(json)
+    })
 }

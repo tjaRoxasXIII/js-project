@@ -8,9 +8,8 @@
   <body>
     <header>
       <h2>Card Clash!</h2>
-      <button id="start">Start Game</button>
     </header>
-
+    
     <main>
       <!-- Add content -->
       <form id="player">
@@ -19,8 +18,9 @@
         <input type="text" name="username" required="required">
         <input type="submit">
       </form>
-      <ol id="scoreboard"></ol>
+      <ol id="scoreboard" style="float: right;"></ol>
       <div id="game_area" width="500px" height="500px"></div>
+      <button id="start">Start Game</button>
     </main>
 
     <script src="./src/index.js"></script>
