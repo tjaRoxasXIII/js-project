@@ -9,6 +9,8 @@ const enemyCards = []
 const heroCards = []
 startButton.style.display = "none"
 let currentPlayer
+let myHero
+let myEnemy
 
 window.addEventListener(`DOMContentLoaded`, (e) => {
     fetcher(ENEMY_URL, buildCards)

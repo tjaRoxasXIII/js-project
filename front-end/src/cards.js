@@ -2,26 +2,17 @@
 function buildCards(list) {
 
     for(const character of list) {
-        let characterDiv = document.createElement("div")
-        characterDiv.className = "card"
-
-        let char = document.createElement("ul")
-        char.innerText = character.name
-        characterDiv.appendChild(char)
-
-        let charHP = document.createElement("li")
-        charHP.innerText = `HP: ${character.hp}`
-        characterDiv.appendChild(charHP)
-
-        let charAtt = document.createElement("li")
-        charAtt.innerText = `Attack: ${character.attack}`
-        characterDiv.appendChild(charAtt)
+        
 
         if(character.points){
-            enemyCards.push(characterDiv)  
+            // characterDiv.id = "enemy-card"
+            let enemy = new Enemy(character.id, character.name, character.hp, character.attack, character.points)
+            enemyCards.push(enemy)  
         } 
         else {
-            heroCards.push(characterDiv)
+            // characterDiv.id = "hero-card"
+            let hero = new Hero(character.id, character.name, character.hp, character.attack)
+            heroCards.push(hero)
         }
     }
 }
@@ -30,22 +21,31 @@ function buildCards(list) {
 function drawCard(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
-    gameArea.appendChild(characterList[i])
-}
-
-function buildHeroCard(list) {
-    for(const hero of list) {
-        let heroDiv = document.createElement("div")
-        heroDiv.className = "card"
-
-        let heroChar = document.createElement("ul")
-        heroChar.innerText = hero.name
-        heroDiv.appendChild(heroChar)
-
-        let heroHp = document.createElement("li")
-        heroHp.innerText = `HP: ${hero.hp}`
-        heroChar.appendChild(heroHp)
-
-        heroCards.push(heroDiv)  
+    let card = characterList[i]
+    if (card instanceof Enemy) {
+        myEnemy = card
     }
+    else {
+        myHero = card
+    }
+
+    let characterDiv = document.createElement("div")
+        
+
+    let char = document.createElement("ul")
+        // char.id = "name"
+        char.innerText = card.name
+        characterDiv.appendChild(char)
+
+    let charHP = document.createElement("li")
+        // charHP.id = "hp"
+        charHP.innerText = `HP: ${card.hp}`
+        characterDiv.appendChild(charHP)
+
+    let charAtt = document.createElement("li")
+        // charAtt.id = "attack"
+        charAtt.innerText = `Attack: ${card.attack}`
+        characterDiv.appendChild(charAtt)
+
+    gameArea.appendChild(characterDiv)
 }
