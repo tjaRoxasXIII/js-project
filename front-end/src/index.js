@@ -2,11 +2,12 @@ const SCORE_URL = "http://localhost:3000/scoreboards/1"
 const PLAYERS_URL = "http://localhost:3000/users"
 const ENEMY_URL = "http://localhost:3000/enemies"
 const HERO_URL = "http://localhost:3000/heros"
+
+let currentPlayer
 let gameArea = document.getElementById("game_area")
 const gameID = 1 //can be adjusted if you have games with different IDs
 let startButton = document.getElementById("start")
 startButton.style.display = "none"
-let currentPlayer
 
 
 window.addEventListener(`DOMContentLoaded`, (e) => {

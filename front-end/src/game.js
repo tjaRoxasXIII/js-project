@@ -59,7 +59,7 @@ function enemyTurn() {
 
     if (action == "heal") {
         myEnemy.hp += 10
-        alert("Enemy has healed")
+        // alert("Enemy has healed")
     }
     if (action == "attack") {
         myHero.hp = myHero.hp - myEnemy.attack

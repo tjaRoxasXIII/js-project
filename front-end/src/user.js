@@ -31,3 +31,19 @@ function createOrSignInPlayer(name, game_id) {
         console.log('Request failure: ', error);
     })
 }
+
+function savePlayer(currentPlayer) {
+    let CURRENTPLAYER_URL = `http://localhost:3000/users/${currentPlayer.id}`
+
+    fetch(CURRENTPLAYER_URL, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            username: currentPlayer.username,
+            top_score: currentPlayer.top_score
+        })
+    })
+}
