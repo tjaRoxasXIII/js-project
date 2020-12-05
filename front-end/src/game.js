@@ -3,6 +3,7 @@ function startGame() {
     drawCard(enemyCards)
     drawCard(heroCards)
     displayActions()
+    fetcher(SCORE_URL, updateScore)
     
 }
 // Assigns player actions to the buttons 

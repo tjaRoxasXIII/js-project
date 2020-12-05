@@ -1,6 +1,11 @@
+//Sets variables to be used when calling drawCard() for either the hero or enemy for global updating
+let myHero
+let myEnemy
+
 let enemyCards = []
 let heroCards = []
 // Parses all enemies from the API into a list that can be randomly drawn from for the next fight
+// This list is updated after every enemy or player is killed
 function buildCards(URL) {
     if (URL[0].points) {
         enemyCards = []
@@ -10,12 +15,10 @@ function buildCards(URL) {
     }
     for(const character of URL) {
         if(character.points){
-            // characterDiv.id = "enemy-card"
             let enemy = new Enemy(character.id, character.name, character.hp, character.attack, character.points)
             enemyCards.push(enemy)
         } 
         else {
-            // characterDiv.id = "hero-card"
             let hero = new Hero(character.id, character.name, character.hp, character.attack)
             heroCards.push(hero)
         }
@@ -37,8 +40,6 @@ function drawCard(cardDeck) {
         myHero = card
         characterDiv.id = "hero-card"
     }
-
-        
     //Sets up a card object to appear as a div within the game area
     let char = document.createElement("ul")
         char.id = "name"

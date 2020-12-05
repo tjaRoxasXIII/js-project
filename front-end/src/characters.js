@@ -1,6 +1,3 @@
-let myHero
-let myEnemy
-
 class Enemy {
     constructor(id, name, hp, attack, points) {
         this.id = id
