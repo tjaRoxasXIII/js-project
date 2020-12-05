@@ -25,6 +25,7 @@ function createOrSignInPlayer(name, game_id) {
     .then(user => {
         const { id, username, score, top_score, scoreboard_id } = user
         currentPlayer = new User(id, username, score, top_score, scoreboard_id)
+        currentPlayer.score = 0
     })
     .catch(function (error) {  
         console.log('Request failure: ', error);

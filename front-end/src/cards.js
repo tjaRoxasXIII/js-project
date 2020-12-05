@@ -17,12 +17,12 @@ function buildCards(list) {
     }
 }
 
-// Randomly draws an character from the specified character list
+// Randomly draws a character from the specified character list
 function drawCard(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
-    debugger
     let card = characterList[i]
+    debugger
     let characterDiv = document.createElement("div")
     if (card instanceof Enemy) {
         myEnemy = card
@@ -36,7 +36,7 @@ function drawCard(characterList) {
         
 
     let char = document.createElement("ul")
-        // char.id = "name"
+        char.id = "name"
         char.innerText = card.name
         characterDiv.appendChild(char)
 
@@ -46,7 +46,7 @@ function drawCard(characterList) {
         characterDiv.appendChild(charHP)
 
     let charAtt = document.createElement("li")
-        // charAtt.id = "attack"
+        charAtt.id = "attack"
         charAtt.innerText = `Attack: ${card.attack}`
         characterDiv.appendChild(charAtt)
 
@@ -59,4 +59,16 @@ function refreshCards() {
 
     let heroCard = document.getElementById("hero-card")
     heroCard.children.hp.innerText = `HP: ${myHero.hp}`
+}
+
+function drawNewEnemy(characterList) {
+    let totalCards = characterList.length
+    let i = Math.floor(Math.random() * totalCards)
+    let card = characterList[i]
+    myEnemy = card
+
+    let newEnemy = document.getElementById("enemy-card").children
+    newEnemy[0].innerText = card.name
+    newEnemy[1].innerText = `HP: ${card.hp}`
+    newEnemy[2].innerText = `Attack: ${card.attack}`
 }

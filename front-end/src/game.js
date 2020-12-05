@@ -81,14 +81,31 @@ function checkIfDead(character) {
         console.log(`You defeated ${myEnemy.name} and earned ${myEnemy.points} points!`)
         console.log(`Your current score is ${currentPlayer.score}`)
         fetcher(ENEMY_URL, buildCards)
-        drawCard(enemyCards)
+        drawNewEnemy(enemyCards)
     }
-    if (myHero.hp < 1) {
-        console.log(`You have died.  Game Over.`)
-    }
-    
-    if (character === myEnemy){
+    else if (character === myEnemy){
         enemyTurn()
     }
+
+    if (myHero.hp < 1) {
+        console.log(`You have died.  Game Over.`)
+        endgame()
+    }
     
+    
+    
+}
+
+function endgame() {
+    while (gameArea.hasChildNodes()) {
+        gameArea.removeChild(gameArea.firstChild)
+    }
+    let gameOver = document.createElement("h2")
+    gameOver.innerText = "Game Over!"
+
+    let yourScore = document.createElement("h3")
+    yourScore.innerText = `Your Score: ${currentPlayer.score}`
+    gameOver.appendChild(yourScore)
+
+    gameArea.appendChild(gameOver)
 }
