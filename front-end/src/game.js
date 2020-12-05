@@ -5,7 +5,7 @@ function startGame() {
     displayActions()
     
 }
-
+// Assigns player actions to the buttons 
 function displayActions() {
     let attackAction = document.createElement("button")
     attackAction.innerText = "Attack"
@@ -32,6 +32,7 @@ function displayActions() {
     })
 }
 
+//Based upon the button clicked, performs the corresponding action
 function playerTurn(action) {
     if (action == "heal") {
         myHero.hp += 10
@@ -48,7 +49,7 @@ function playerTurn(action) {
     refreshCards()
     checkIfDead(myEnemy)
 }
-
+//Generates a random move for the enemy
 function enemyTurn() {
     let enemyActions = ["attack", "defend", "miss", "heal"]
     let actions = enemyActions.length
@@ -58,7 +59,7 @@ function enemyTurn() {
 
     if (action == "heal") {
         myEnemy.hp += 10
-        console.log("Enemy has healed")
+        alert("Enemy has healed")
     }
     if (action == "attack") {
         myHero.hp = myHero.hp - myEnemy.attack
@@ -75,6 +76,7 @@ function enemyTurn() {
     checkIfDead(myHero)
 }
 
+//Checks hero and enemy health to determine next move
 function checkIfDead(character) {
     if (myEnemy.hp < 1) {
         currentPlayer.score += myEnemy.points
@@ -95,7 +97,7 @@ function checkIfDead(character) {
     
     
 }
-
+//When game ends, remove the character cards, disply score, and ask to restart game
 function endgame() {
     while (gameArea.hasChildNodes()) {
         gameArea.removeChild(gameArea.firstChild)
@@ -107,5 +109,23 @@ function endgame() {
     yourScore.innerText = `Your Score: ${currentPlayer.score}`
     gameOver.appendChild(yourScore)
 
+    let restart = document.createElement("button")
+    restart.innerText = "Play again?"
+    restart.addEventListener('click', function() {
+        restartGame()
+    })
+    gameOver.appendChild(restart)
+
+
     gameArea.appendChild(gameOver)
+}
+
+//Clears game area and starts game again
+function restartGame() {
+    while (gameArea.hasChildNodes()) {
+        gameArea.removeChild(gameArea.firstChild)
+    }
+    fetcher(ENEMY_URL, buildCards)
+    fetcher(HERO_URL, buildCards)
+    startGame()
 }

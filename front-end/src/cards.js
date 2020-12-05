@@ -22,8 +22,8 @@ function drawCard(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
     let card = characterList[i]
-    debugger
     let characterDiv = document.createElement("div")
+    //Determines whether the card is for an enemy or a hero
     if (card instanceof Enemy) {
         myEnemy = card
         characterDiv.id = "enemy-card"
@@ -34,7 +34,7 @@ function drawCard(characterList) {
     }
 
         
-
+    //Sets up a card object to appear as a div within the game area
     let char = document.createElement("ul")
         char.id = "name"
         char.innerText = card.name
@@ -53,6 +53,7 @@ function drawCard(characterList) {
     gameArea.appendChild(characterDiv)
 }
 
+//Updates DOM with current Hero or Enemy HP values
 function refreshCards() {
     let enemyCard = document.getElementById("enemy-card")
     enemyCard.children.hp.innerText = `HP: ${myEnemy.hp}`
