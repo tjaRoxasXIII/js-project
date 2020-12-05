@@ -5,12 +5,9 @@ const HERO_URL = "http://localhost:3000/heros"
 let gameArea = document.getElementById("game_area")
 const gameID = 1 //can be adjusted if you have games with different IDs
 let startButton = document.getElementById("start")
-let enemyCards = []
-let heroCards = []
 startButton.style.display = "none"
 let currentPlayer
-let myHero
-let myEnemy
+
 
 window.addEventListener(`DOMContentLoaded`, (e) => {
     fetcher(ENEMY_URL, buildCards)

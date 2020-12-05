@@ -1,13 +1,18 @@
+let enemyCards = []
+let heroCards = []
 // Parses all enemies from the API into a list that can be randomly drawn from for the next fight
-function buildCards(list) {
-
-    for(const character of list) {
-        
-
+function buildCards(URL) {
+    if (URL[0].points) {
+        enemyCards = []
+    }
+    else {
+        heroCards = []
+    }
+    for(const character of URL) {
         if(character.points){
             // characterDiv.id = "enemy-card"
             let enemy = new Enemy(character.id, character.name, character.hp, character.attack, character.points)
-            enemyCards.push(enemy)  
+            enemyCards.push(enemy)
         } 
         else {
             // characterDiv.id = "hero-card"
@@ -18,10 +23,10 @@ function buildCards(list) {
 }
 
 // Randomly draws a character from the specified character list
-function drawCard(characterList) {
-    let totalCards = characterList.length
+function drawCard(cardDeck) {
+    let totalCards = cardDeck.length
     let i = Math.floor(Math.random() * totalCards)
-    let card = characterList[i]
+    let card = cardDeck[i]
     let characterDiv = document.createElement("div")
     //Determines whether the card is for an enemy or a hero
     if (card instanceof Enemy) {

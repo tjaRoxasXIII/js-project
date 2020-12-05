@@ -127,5 +127,6 @@ function restartGame() {
     }
     fetcher(ENEMY_URL, buildCards)
     fetcher(HERO_URL, buildCards)
+    currentPlayer.score = 0
     startGame()
 }
