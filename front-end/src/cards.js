@@ -50,6 +50,10 @@ function drawCard(cardDeck) {
         charHP.innerText = `HP: ${card.hp}`
         characterDiv.appendChild(charHP)
 
+    let charImg = document.createElement("img")
+        charImg.src = card.img
+        characterDiv.appendChild(charImg)
+        
     let charAtt = document.createElement("li")
         charAtt.id = "attack"
         charAtt.innerText = `Attack: ${card.attack}`
@@ -76,5 +80,6 @@ function drawNewEnemy(characterList) {
     let newEnemy = document.getElementById("enemy-card").children
     newEnemy[0].innerText = card.name
     newEnemy[1].innerText = `HP: ${card.hp}`
-    newEnemy[2].innerText = `Attack: ${card.attack}`
+    newEnemy[2].src = card.img
+    newEnemy[3].innerText = `Attack: ${card.attack}`
 }

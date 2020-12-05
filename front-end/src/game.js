@@ -109,6 +109,10 @@ function endgame() {
     yourScore.innerText = `Your Score: ${currentPlayer.score}`
     gameOver.appendChild(yourScore)
 
+    if (currentPlayer.score > currentPlayer.top_score) {
+        currentPlayer.top_score = currentPlayer.score
+    }
+
     let restart = document.createElement("button")
     restart.innerText = "Play again?"
     restart.addEventListener('click', function() {
