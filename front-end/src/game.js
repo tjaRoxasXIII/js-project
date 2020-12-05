@@ -111,6 +111,7 @@ function endgame() {
 
     if (currentPlayer.score > currentPlayer.top_score) {
         currentPlayer.top_score = currentPlayer.score
+        savePlayer(currentPlayer)
     }
 
     let restart = document.createElement("button")

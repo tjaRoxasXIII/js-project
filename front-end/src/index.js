@@ -27,6 +27,7 @@ window.addEventListener(`DOMContentLoaded`, (e) => {
 
 })
 
+//Used to render and display top 10 scores from the Database
 function displayScores(scorelist) {
 
     let board = document.getElementById("scoreboard")
