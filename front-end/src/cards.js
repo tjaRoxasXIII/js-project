@@ -21,6 +21,7 @@ function buildCards(list) {
 function drawCard(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
+    debugger
     let card = characterList[i]
     let characterDiv = document.createElement("div")
     if (card instanceof Enemy) {
