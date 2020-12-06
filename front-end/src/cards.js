@@ -31,6 +31,7 @@ function drawCard(cardDeck) {
     let i = Math.floor(Math.random() * totalCards)
     let card = cardDeck[i]
     let characterDiv = document.createElement("div")
+        characterDiv.className = "card"
     //Determines whether the card is for an enemy or a hero
     if (card instanceof Enemy) {
         myEnemy = card

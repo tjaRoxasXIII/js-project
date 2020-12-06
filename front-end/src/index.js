@@ -12,12 +12,8 @@ startButton.style.display = "none"
 //Used to DRY up fetch requests from API.  Passes in the URL to fetch from and the function to call on the return data
 function fetcher(URL, fnctn) {
     fetch(URL)
-        .then(function(response) {
-        return response.json()
-    })
-    .then(function(json) {
-        fnctn(json)
-    })
+    .then(response => response.json())
+    .then(json => fnctn(json))
 }
 
 window.addEventListener(`DOMContentLoaded`, (e) => {
