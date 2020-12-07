@@ -42,37 +42,37 @@ function drawCard(cardDeck) {
         characterDiv.id = "hero-card"
     }
     //Sets up a card object to appear as a div within the game area
-
+    
     let char = document.createElement("h4")
-        char.id = "name"
-        char.class = "card-title"
-        char.innerText = card.name
-        characterDiv.appendChild(char)
-
+    char.id = "name"
+    char.class = "card-title"
+    char.innerText = card.name
+    characterDiv.appendChild(char)
+    
     let charHP = document.createElement("p")
-        charHP.className = "card-text"
-        charHP.id = "hp"
-        charHP.innerText = `HP: ${card.hp}`
-        characterDiv.appendChild(charHP)
-
+    charHP.className = "card-text"
+    charHP.id = "hp"
+    charHP.innerText = `HP: ${card.maxHP}`
+    characterDiv.appendChild(charHP)
+    
     let charHpBar = document.createElement("div")
-        charHpBar.className = "progress"
-        charHpBar.id = "progress"
-        let barHealth = document.createElement("div")
-            barHealth.id = "currentHP"
-            barHealth.className = "progress-bar progress-bar-success"
-            barHealth.style.width = `${(card.hp / card.maxHP) * 100}%`
-            charHpBar.appendChild(barHealth)
-        characterDiv.appendChild(charHpBar)
-
+    charHpBar.className = "progress"
+    charHpBar.id = "progress"
+    let barHealth = document.createElement("div")
+    barHealth.id = "currentHP"
+    barHealth.className = "progress-bar progress-bar-success"
+    barHealth.style.width = `${(card.hp / card.maxHP) * 100}%`
+    charHpBar.appendChild(barHealth)
+    characterDiv.appendChild(charHpBar)
+    
     let charImg = document.createElement("img")
-    charImg.src = card.img
-    charImg.className = "card-img-top"
-    charImg.alt = "Custom image missing"
-    characterDiv.appendChild(charImg)
-        
+        charImg.src = card.img
+        charImg.className = "card-img-top"
+        charImg.alt = "Custom image missing"
+        characterDiv.appendChild(charImg)
+    
     let charAtt = document.createElement("p")
-        charAtt.className = "card-text"
+    charAtt.className = "card-text"
         charAtt.id = "attack"
         charAtt.innerText = `Attack: ${card.attack}`
         characterDiv.appendChild(charAtt)

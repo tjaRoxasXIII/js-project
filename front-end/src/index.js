@@ -29,12 +29,13 @@ window.addEventListener(`DOMContentLoaded`, (e) => {
         e.reset
         startButton.style.display = "block"
         myForm.style.display = "none"
+        buildYourScore()
     })
     document.getElementById("start").addEventListener("click", startGame)
 
 })
 
-//Used to render scoreboard
+//Used to grab our scoreboard element from the DOM
 function buildScoreboard() {
     let board = document.getElementById("scoreboard")
     
@@ -70,4 +71,17 @@ function updateScore(scorelist) {
     }
 }
 
+function buildYourScore() {
+    let board = document.getElementById("your_score")
+    
+    let title = document.createElement('h3')
+    title.innerText = `Current Score`
+    board.appendChild(title)
+
+    let score = document.createElement('h4')
+    score.id = "current_score"
+    score.innerText = "0"
+    board.appendChild(score)
+    
+}
 

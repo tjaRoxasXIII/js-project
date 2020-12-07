@@ -36,11 +36,11 @@ function displayActions() {
 //Based upon the button clicked, performs the corresponding action
 function playerTurn(action) {
     if (action == "heal") {
-        if (myHero.hp >= myHero.maxHP - 9) {
+        if (myHero.hp > myHero.maxHP - Math.floor(myHero.maxHP * .2)) {
             myHero.hp = myHero.maxHP
         }
         else {
-            myHero.hp += 10
+            myHero.hp += Math.ceil(myHero.maxHP * .2)
             console.log(myHero.hp)
         }
     }
@@ -64,8 +64,13 @@ function enemyTurn() {
     let action = enemyActions[i]
 
     if (action == "heal") {
-        myEnemy.hp += 10
-        // alert("Enemy has healed")
+        if (myEnemy.hp > myEnemy.maxHP - Math.floor(myEnemy.maxHP * .4)) {
+            myEnemy.hp = myEnemy.maxHP
+        }
+        else {
+            myEnemy.hp += Math.ceil(myEnemy.maxHP * .4)
+        }
+        
     }
     if (action == "attack") {
         myHero.hp = myHero.hp - myEnemy.attack
@@ -86,8 +91,8 @@ function enemyTurn() {
 function checkIfDead(character) {
     if (myEnemy.hp < 1) {
         currentPlayer.score += myEnemy.points
-        console.log(`You defeated ${myEnemy.name} and earned ${myEnemy.points} points!`)
-        console.log(`Your current score is ${currentPlayer.score}`)
+        alert(`You defeated ${myEnemy.name} and earned ${myEnemy.points} points!`)
+        document.getElementById("your_score").children.current_score.innerText = currentPlayer.score
         fetcher(ENEMY_URL, buildCards)
         drawNewEnemy(enemyCards)
     }
@@ -139,5 +144,6 @@ function restartGame() {
     fetcher(ENEMY_URL, buildCards)
     fetcher(HERO_URL, buildCards)
     currentPlayer.score = 0
+    document.getElementById("your_score").children.current_score.innerText = currentPlayer.score
     startGame()
 }
