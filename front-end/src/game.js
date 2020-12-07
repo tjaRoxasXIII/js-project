@@ -36,8 +36,13 @@ function displayActions() {
 //Based upon the button clicked, performs the corresponding action
 function playerTurn(action) {
     if (action == "heal") {
-        myHero.hp += 10
-        console.log(myHero.hp)
+        if (myHero.hp >= myHero.maxHP - 9) {
+            myHero.hp = myHero.maxHP
+        }
+        else {
+            myHero.hp += 10
+            console.log(myHero.hp)
+        }
     }
     if (action == "attack") {
         myEnemy.hp = myEnemy.hp - myHero.attack
