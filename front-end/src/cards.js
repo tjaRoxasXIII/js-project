@@ -100,8 +100,10 @@ function drawNewEnemy(characterList) {
     myEnemy = card
 
     let newEnemy = document.getElementById("enemy-card").children
+    debugger
     newEnemy[0].innerText = card.name
     newEnemy[1].innerText = `HP: ${card.hp}`
-    newEnemy[2].src = card.img
-    newEnemy[3].innerText = `Attack: ${card.attack}`
+    newEnemy.progress.firstChild.style.width = `100%`
+    newEnemy[3].src = card.img
+    newEnemy[4].innerText = `Attack: ${card.attack}`
 }
