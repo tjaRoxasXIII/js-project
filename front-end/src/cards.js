@@ -42,21 +42,37 @@ function drawCard(cardDeck) {
         characterDiv.id = "hero-card"
     }
     //Sets up a card object to appear as a div within the game area
-    let char = document.createElement("ul")
+
+    let char = document.createElement("h4")
         char.id = "name"
+        char.class = "card-title"
         char.innerText = card.name
         characterDiv.appendChild(char)
 
-    let charHP = document.createElement("li")
+    let charHP = document.createElement("p")
+        charHP.className = "card-text"
         charHP.id = "hp"
         charHP.innerText = `HP: ${card.hp}`
         characterDiv.appendChild(charHP)
 
+    let charHpBar = document.createElement("div")
+        charHpBar.className = "progress"
+        charHpBar.id = "progress"
+        let barHealth = document.createElement("div")
+            barHealth.id = "currentHP"
+            barHealth.className = "progress-bar progress-bar-success"
+            barHealth.style.width = `${(card.hp / card.maxHP) * 100}%`
+            charHpBar.appendChild(barHealth)
+        characterDiv.appendChild(charHpBar)
+
     let charImg = document.createElement("img")
-        charImg.src = card.img
-        characterDiv.appendChild(charImg)
+    charImg.src = card.img
+    charImg.className = "card-img-top"
+    charImg.alt = "Custom image missing"
+    characterDiv.appendChild(charImg)
         
-    let charAtt = document.createElement("li")
+    let charAtt = document.createElement("p")
+        charAtt.className = "card-text"
         charAtt.id = "attack"
         charAtt.innerText = `Attack: ${card.attack}`
         characterDiv.appendChild(charAtt)
@@ -65,12 +81,16 @@ function drawCard(cardDeck) {
 }
 
 //Updates DOM with current Hero or Enemy HP values
-function refreshCards() {
-    let enemyCard = document.getElementById("enemy-card")
-    enemyCard.children.hp.innerText = `HP: ${myEnemy.hp}`
+function refreshCard(character) {
+    if (character == "player") {
+        let enemyCard = document.getElementById("enemy-card")
+        enemyCard.children.hp.innerText = `HP: ${myEnemy.hp}`
+        enemyCard.children.progress.firstChild.style.width = `${(myEnemy.hp / myEnemy.maxHP) * 100}%`
+    }
 
     let heroCard = document.getElementById("hero-card")
     heroCard.children.hp.innerText = `HP: ${myHero.hp}`
+    heroCard.children.progress.firstChild.style.width = `${(myHero.hp / myHero.maxHP) * 100}%`
 }
 
 function drawNewEnemy(characterList) {

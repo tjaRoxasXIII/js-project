@@ -6,6 +6,7 @@ class Enemy {
         this.attack = attack
         this.points = points
         this.img = `./imgs/${name}.gif`
+        this.maxHP = hp
     }
 }
 
@@ -16,5 +17,6 @@ class Hero {
         this.hp = hp
         this.attack = attack
         this.img = `./imgs/${name}.gif`
+        this.maxHP = hp
     }
 }

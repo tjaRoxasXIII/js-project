@@ -2,8 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Card Clash</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
     <header>
@@ -12,16 +16,18 @@
     
     <main>
       <!-- Add content -->
-      <form id="player">
-        <h2>Enter a Username:</h2>
-        <label>Username:</label>
-        <input type="text" name="username" required="required">
-        <input type="submit">
-      </form>
-      <ol id="scoreboard" style="float: right;"></ol>
-      <div id="game_area" style="margin: auto; width: 50%; padding-bottom: 5%;"></div>
-      <div id="event-box"></div>
-      <button id="start" style="margin: auto;">Start Game</button>
+      <div class="container">
+        <form id="player">
+          <h2>Enter a Username:</h2>
+          <label>Username:</label>
+          <input type="text" name="username" required="required">
+          <input type="submit">
+        </form>
+        <ol id="scoreboard" style="float: right;"></ol>
+        <div id="game_area" style="margin: auto; width: 50%; padding-bottom: 5%;"></div>
+        <div id="event-box"></div>
+        <button id="start" style="margin: auto;">Start Game</button>
+      </div>
     </main>
 
     <script src="./src/index.js"></script>

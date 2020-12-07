@@ -47,7 +47,7 @@ function playerTurn(action) {
         console.log(`You took no damage`)
     }
 
-    refreshCards()
+    refreshCard("enemy")
     checkIfDead(myEnemy)
 }
 //Generates a random move for the enemy
@@ -73,7 +73,7 @@ function enemyTurn() {
         console.log(`Enemy has missed`)
     }
 
-    refreshCards()
+    refreshCard("player")
     checkIfDead(myHero)
 }
 
