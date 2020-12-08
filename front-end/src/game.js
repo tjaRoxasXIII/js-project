@@ -9,23 +9,25 @@ function startGame() {
 // Assigns player actions to the buttons 
 function displayActions() {
     let attackAction = document.createElement("button")
+    attackAction.id = "Attack_button"
     attackAction.innerText = "Attack"
     gameArea.appendChild(attackAction)
     attackAction.addEventListener("click", function(e) {
         setTimeout(function() {
             playerTurn("attack")
             e.preventDefault()
-        }, 1000)
+        }, 500)
     })
 
-    let defendAction = document.createElement("button")
-    defendAction.innerText = "Defend"
-    gameArea.appendChild(defendAction)
-    defendAction.addEventListener("click", function() {
-        playerTurn("defend")
-    })
+    // let defendAction = document.createElement("button")
+    // defendAction.innerText = "Defend"
+    // gameArea.appendChild(defendAction)
+    // defendAction.addEventListener("click", function() {
+    //     playerTurn("defend")
+    // })
 
     let healAction = document.createElement("button")
+    healAction.id = "Heal_button"
     healAction.innerText = "Heal"
     gameArea.appendChild(healAction)
     healAction.addEventListener("click", function() {
@@ -52,8 +54,12 @@ function playerTurn(action) {
         console.log(`You took no damage`)
     }
 
+    document.querySelector("#Attack_button").style.display = "none"
+    document.querySelector("#Heal_button").style.display = "none"
     refreshCard("enemy")
-    checkIfDead(myEnemy)
+    setTimeout(function() {
+        checkIfDead(myEnemy)
+    }, 500)
 }
 //Generates a random move for the enemy
 function enemyTurn() {
@@ -83,8 +89,12 @@ function enemyTurn() {
         console.log(`Enemy has missed`)
     }
 
-    refreshCard("player")
-    checkIfDead(myHero)
+    setTimeout( function() {
+        refreshCard("player")
+        document.querySelector("#Attack_button").style.display = ""
+        document.querySelector("#Heal_button").style.display = ""
+        checkIfDead(myHero)
+    }, 1000)
 }
 
 //Checks hero and enemy health to determine next move
@@ -93,6 +103,8 @@ function checkIfDead(character) {
         currentPlayer.score += myEnemy.points
         alert(`You defeated ${myEnemy.name} and earned ${myEnemy.points} points!`)
         document.getElementById("your_score").children.current_score.innerText = currentPlayer.score
+        document.querySelector("#Attack_button").style.display = ""
+        document.querySelector("#Heal_button").style.display = ""
         fetcher(ENEMY_URL, buildCards)
         drawNewEnemy(enemyCards)
     }

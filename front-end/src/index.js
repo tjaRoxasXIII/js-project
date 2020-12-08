@@ -57,16 +57,17 @@ function updateScore(scorelist) {
 
     for(const user of scorelist.users) {
         if (user.top_score){
-            top_scores.push(`${user.username}: ${user.top_score}`)
+            top_scores.push([user.username, user.top_score])
         }
     }
+    //Sorts the 
+    top_scores.sort(function(a, b){return b[1]-a[1]})
 
-    top_scores.sort(function(a, b){return b-a})
-    
     for(let i = 1; i < 11; i++) {
         let user_score = board.childNodes
         if (top_scores[i - 1]){
-            user_score[i].innerText = top_scores[i - 1]
+            debugger
+            user_score[i].innerText = `${top_scores[i - 1][0]}: ${top_scores[i -1][1]}`
         }
     }
 }
