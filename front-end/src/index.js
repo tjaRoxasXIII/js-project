@@ -15,7 +15,7 @@ function fetcher(URL, fnctn) {
     .then(response => response.json())
     .then(json => fnctn(json))
 }
-
+//Loads all base content once the server is up and pulls info from API
 window.addEventListener(`DOMContentLoaded`, (e) => {
     fetcher(ENEMY_URL, buildCards)
     fetcher(HERO_URL, buildCards)
@@ -32,10 +32,9 @@ window.addEventListener(`DOMContentLoaded`, (e) => {
         buildYourScore()
     })
     document.getElementById("start").addEventListener("click", startGame)
-
 })
 
-//Used to grab our scoreboard element from the DOM
+//Used to grab our scoreboard element from the DOM and build the visual
 function buildScoreboard() {
     let board = document.getElementById("scoreboard")
     
@@ -54,24 +53,24 @@ function buildScoreboard() {
 function updateScore(scorelist) {
     let board = document.getElementById("scoreboard")
     let top_scores = []
-
+    //Adds anyone with a top_score attr that isn't null or empty and pushes to an array
     for(const user of scorelist.users) {
         if (user.top_score){
             top_scores.push([user.username, user.top_score])
         }
     }
-    //Sorts the 
+    //Sorts the array by the highest score in descending order and updates the DOM
     top_scores.sort(function(a, b){return b[1]-a[1]})
 
     for(let i = 1; i < 11; i++) {
         let user_score = board.childNodes
         if (top_scores[i - 1]){
-            debugger
             user_score[i].innerText = `${top_scores[i - 1][0]}: ${top_scores[i -1][1]}`
         }
     }
 }
 
+//Creates a second score for the current player's game session
 function buildYourScore() {
     let board = document.getElementById("your_score")
     

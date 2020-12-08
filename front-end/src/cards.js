@@ -42,28 +42,27 @@ function drawCard(cardDeck) {
         characterDiv.id = "hero-card"
     }
     //Sets up a card object to appear as a div within the game area
-    
     let char = document.createElement("h4")
-    char.id = "name"
-    char.class = "card-title"
-    char.innerText = card.name
-    characterDiv.appendChild(char)
+        char.id = "name"
+        char.class = "card-title"
+        char.innerText = card.name
+        characterDiv.appendChild(char)
     
     let charHP = document.createElement("p")
-    charHP.className = "card-text"
-    charHP.id = "hp"
-    charHP.innerText = `HP: ${card.maxHP}`
-    characterDiv.appendChild(charHP)
+        charHP.className = "card-text"
+        charHP.id = "hp"
+        charHP.innerText = `HP: ${card.maxHP}`
+        characterDiv.appendChild(charHP)
     
     let charHpBar = document.createElement("div")
-    charHpBar.className = "progress"
-    charHpBar.id = "progress"
+        charHpBar.className = "progress"
+        charHpBar.id = "progress"
     let barHealth = document.createElement("div")
-    barHealth.id = "currentHP"
-    barHealth.className = "progress-bar progress-bar-success"
-    barHealth.style.width = `${(card.hp / card.maxHP) * 100}%`
-    charHpBar.appendChild(barHealth)
-    characterDiv.appendChild(charHpBar)
+        barHealth.id = "currentHP"
+        barHealth.className = "progress-bar progress-bar-success"
+        barHealth.style.width = `${(card.hp / card.maxHP) * 100}%`
+        charHpBar.appendChild(barHealth)
+        characterDiv.appendChild(charHpBar)
     
     let charImg = document.createElement("img")
         charImg.src = card.img
@@ -72,7 +71,7 @@ function drawCard(cardDeck) {
         characterDiv.appendChild(charImg)
     
     let charAtt = document.createElement("p")
-    charAtt.className = "card-text"
+        charAtt.className = "card-text"
         charAtt.id = "attack"
         charAtt.innerText = `Attack: ${card.attack}`
         characterDiv.appendChild(charAtt)
@@ -82,23 +81,26 @@ function drawCard(cardDeck) {
 
 //Updates DOM with current Hero or Enemy HP values
 function refreshCard(character) {
-    if (character == "player") {
+    if (character === "enemy") {
         let enemyCard = document.getElementById("enemy-card")
         enemyCard.children.hp.innerText = `HP: ${myEnemy.hp}`
         enemyCard.children.progress.firstChild.style.width = `${(myEnemy.hp / myEnemy.maxHP) * 100}%`
     }
+    if (character === "player") {
+        let heroCard = document.getElementById("hero-card")
+        heroCard.children.hp.innerText = `HP: ${myHero.hp}`
+        heroCard.children.progress.firstChild.style.width = `${(myHero.hp / myHero.maxHP) * 100}%`
+    }
 
-    let heroCard = document.getElementById("hero-card")
-    heroCard.children.hp.innerText = `HP: ${myHero.hp}`
-    heroCard.children.progress.firstChild.style.width = `${(myHero.hp / myHero.maxHP) * 100}%`
 }
 
+//Randomly draws another card from the enemyCard array and assigns it to the myEnemy variable
 function drawNewEnemy(characterList) {
     let totalCards = characterList.length
     let i = Math.floor(Math.random() * totalCards)
     let card = characterList[i]
     myEnemy = card
-
+    //Updates the DOM enemy-card with new Enemy info
     let newEnemy = document.getElementById("enemy-card").children
     newEnemy[0].innerText = card.name
     newEnemy[1].innerText = `HP: ${card.hp}`

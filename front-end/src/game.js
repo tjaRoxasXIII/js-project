@@ -3,21 +3,17 @@ function startGame() {
     drawCard(enemyCards)
     drawCard(heroCards)
     displayActions()
-    fetcher(SCORE_URL, updateScore)
-    
+    fetcher(SCORE_URL, updateScore)   
 }
 // Assigns player actions to the buttons 
 function displayActions() {
     let attackAction = document.createElement("button")
-    attackAction.id = "Attack_button"
-    attackAction.innerText = "Attack"
-    gameArea.appendChild(attackAction)
-    attackAction.addEventListener("click", function(e) {
-        setTimeout(function() {
+        attackAction.id = "Attack_button"
+        attackAction.innerText = "Attack"
+        gameArea.appendChild(attackAction)
+        attackAction.addEventListener("click", function() {
             playerTurn("attack")
-            e.preventDefault()
-        }, 500)
-    })
+        })
 
     // let defendAction = document.createElement("button")
     // defendAction.innerText = "Defend"
@@ -27,78 +23,95 @@ function displayActions() {
     // })
 
     let healAction = document.createElement("button")
-    healAction.id = "Heal_button"
-    healAction.innerText = "Heal"
-    gameArea.appendChild(healAction)
-    healAction.addEventListener("click", function() {
-        playerTurn("heal")
-    })
+        healAction.id = "Heal_button"
+        healAction.innerText = "Heal"
+        gameArea.appendChild(healAction)
+        healAction.addEventListener("click", function() {
+            playerTurn("heal")
+        })
+
+    let dialogueBox = document.createElement("div")
+        dialogueBox.id = "Log_box"
+        dialogueBox.innerText = "Choose your action"
+        gameArea.appendChild(dialogueBox)
+
+}
+
+//Updates dialogue based on actions performed
+function updateText(text) {
+    document.getElementById("Log_box").innerText = text
 }
 
 //Based upon the button clicked, performs the corresponding action
 function playerTurn(action) {
-    if (action == "heal") {
-        if (myHero.hp > myHero.maxHP - Math.floor(myHero.maxHP * .2)) {
-            myHero.hp = myHero.maxHP
-        }
-        else {
-            myHero.hp += Math.ceil(myHero.maxHP * .2)
-            console.log(myHero.hp)
-        }
-    }
-    if (action == "attack") {
-        myEnemy.hp = myEnemy.hp - myHero.attack
-        console.log(myEnemy.hp)
-    }
-    if (action == "defend") {
-        console.log(`You took no damage`)
+    switch (action) {
+        case "heal":
+            if (myHero.hp > myHero.maxHP - Math.floor(myHero.maxHP * .3)) {
+                myHero.hp = myHero.maxHP
+            }
+            else {
+                myHero.hp += Math.ceil(myHero.maxHP * .3)
+            }
+            refreshCard("player")
+            updateText("You have healed")
+            break;
+        case "attack":
+            myEnemy.hp = myEnemy.hp - myHero.attack
+            refreshCard("enemy")
+            updateText(`You attack the ${myEnemy.name}!`)
+            // break;
+        // case "defend":
+        //     console.log(`Enemy has defended`)
     }
 
     document.querySelector("#Attack_button").style.display = "none"
     document.querySelector("#Heal_button").style.display = "none"
-    refreshCard("enemy")
-    setTimeout(function() {
-        checkIfDead(myEnemy)
-    }, 500)
+    checkIfDead(myEnemy)//Passing the enemy to this function calls the enemies turn if the enemy is still alive
 }
 //Generates a random move for the enemy
 function enemyTurn() {
-    let enemyActions = ["attack", "defend", "miss", "heal"]
+    let enemyActions = ["attack", "miss", "heal"]
     let actions = enemyActions.length
     let i = Math.floor(Math.random() * actions)
 
     let action = enemyActions[i]
 
-    if (action == "heal") {
-        if (myEnemy.hp > myEnemy.maxHP - Math.floor(myEnemy.maxHP * .4)) {
-            myEnemy.hp = myEnemy.maxHP
-        }
-        else {
-            myEnemy.hp += Math.ceil(myEnemy.maxHP * .4)
-        }
-        
-    }
-    if (action == "attack") {
-        myHero.hp = myHero.hp - myEnemy.attack
-        console.log("Enemy has attacked")
-    }
-    if (action == "defend") {
-        console.log(`Enemy has defended`)
-    }
-    if (action == "miss") {
-        console.log(`Enemy has missed`)
+    switch (action) {
+        case "heal":
+            if (myEnemy.hp > myEnemy.maxHP - Math.floor(myEnemy.maxHP * .4)) {
+                myEnemy.hp = myEnemy.maxHP
+            }
+            else {
+                myEnemy.hp += Math.ceil(myEnemy.maxHP * .4)
+            }
+            refreshCard("enemy")
+            updateText(`${myEnemy.name} has healed.`)
+            break;
+        case "attack":
+            myHero.hp = myHero.hp - myEnemy.attack
+            refreshCard("player")
+            updateText(`${myEnemy.name} attacks you!`)
+            break;
+        case "miss":
+            updateText(`${myEnemy.name} has missed...`)
     }
 
+    checkIfDead(myHero)
     setTimeout( function() {
-        refreshCard("player")
         document.querySelector("#Attack_button").style.display = ""
         document.querySelector("#Heal_button").style.display = ""
-        checkIfDead(myHero)
-    }, 1000)
+    }, 500)
+    
 }
 
 //Checks hero and enemy health to determine next move
 function checkIfDead(character) {
+    if (myHero.hp < 1) {
+        setTimeout( function() {
+            alert(`You have died.  Game Over.`)
+        }, 500)
+        endgame()
+    }
     if (myEnemy.hp < 1) {
         currentPlayer.score += myEnemy.points
         alert(`You defeated ${myEnemy.name} and earned ${myEnemy.points} points!`)
@@ -109,15 +122,11 @@ function checkIfDead(character) {
         drawNewEnemy(enemyCards)
     }
     else if (character === myEnemy){
-        enemyTurn()
+        refreshCard("player")
+        setTimeout( function() {
+            enemyTurn()
+        }, 1000)
     }
-
-    if (myHero.hp < 1) {
-        console.log(`You have died.  Game Over.`)
-        endgame()
-    }
-    
-    
     
 }
 //When game ends, remove the character cards, disply score, and ask to restart game
@@ -143,7 +152,6 @@ function endgame() {
         restartGame()
     })
     gameOver.appendChild(restart)
-
 
     gameArea.appendChild(gameOver)
 }
