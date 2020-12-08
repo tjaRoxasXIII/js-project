@@ -1,4 +1,4 @@
-//Sets variables to be used when calling drawCard() for either the hero or enemy for global updating
+//Sets global variables to be used when calling drawCard() for either the hero or enemy for global updating
 let myHero
 let myEnemy
 
@@ -91,7 +91,6 @@ function refreshCard(character) {
         heroCard.children.hp.innerText = `HP: ${myHero.hp}`
         heroCard.children.progress.firstChild.style.width = `${(myHero.hp / myHero.maxHP) * 100}%`
     }
-
 }
 
 //Randomly draws another card from the enemyCard array and assigns it to the myEnemy variable

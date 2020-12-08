@@ -25,7 +25,7 @@ window.addEventListener(`DOMContentLoaded`, (e) => {
     myForm.addEventListener("submit", function(e) {
         e.preventDefault()
         const name = this.username.value
-        createOrSignInPlayer(name, gameID)
+        User.createOrSignInPlayer(name, gameID)
         e.reset
         startButton.style.display = "block"
         myForm.style.display = "none"
