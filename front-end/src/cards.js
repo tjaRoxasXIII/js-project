@@ -36,10 +36,14 @@ function drawCard(cardDeck) {
     if (card instanceof Enemy) {
         myEnemy = card
         characterDiv.id = "enemy-card"
+        characterDiv.style.backgroundColor = "gray"
+        characterDiv.style.padding = "5px"
     }
     else {
         myHero = card
         characterDiv.id = "hero-card"
+        characterDiv.style.backgroundColor = "teal"
+        characterDiv.style.padding = "5px"
     }
     //Sets up a card object to appear as a div within the game area
     let char = document.createElement("h4")

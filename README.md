@@ -1,6 +1,6 @@
 # README
 
-This application is a Rails-API backend which serves information to an HTML front-end through the use of Javascript fetches.  The intent is to replicate, on a very low level, the combat style of a Turn-based RPG.  To begin the application, please use the following instructions
+This application is a Rails-API backend which serves information to an HTML front-end through the use of Javascript fetches.  The intent is to replicate, on a very low level, the combat style of a Turn-based RPG.  To begin the application, please use the following instructions:
 
 # ToDo
 
