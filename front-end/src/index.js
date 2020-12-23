@@ -10,10 +10,10 @@ let startButton = document.getElementById("start")
 startButton.style.display = "none"
 
 //Used to DRY up fetch requests from API.  Passes in the URL to fetch from and the function to call on the return data
-function fetcher(URL, fnctn) {
+function fetcher(URL, callback) {
     fetch(URL)
     .then(response => response.json())
-    .then(json => fnctn(json))
+    .then(json => callback(json))
 }
 //Loads all base content once the server is up and pulls info from API
 window.addEventListener(`DOMContentLoaded`, (e) => {
